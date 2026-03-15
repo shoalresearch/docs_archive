@@ -1,122 +1,132 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "name": "Shoal API",
   "theme": "mint",
-  "name": "Mint Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+  "logo": {
+    "dark": "/images/logo-white.svg",
+    "light": "/images/logo-black.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/favicon.svg",
+  "colors": {
+    "primary": "#FF6B35",
+    "light": "#FF8C5A",
+    "dark": "#E85A2A"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Get API Key",
+        "href": "https://app.shoal.xyz"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/shoalresearch",
+      "github": "https://github.com/shoalresearch"
+    }
+  },
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
-              "index",
+              "introduction",
               "quickstart",
-              "development"
+              "api-reference/authentication"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Using the API",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "guides/pagination",
+              "guides/errors",
+              "guides/rate-limits",
+              "guides/versioning",
+              "guides/best-practices",
+              "guides/examples"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Integrations",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Overview",
+            "pages": ["integrations/overview"]
+          },
+          {
+            "group": "SDK & Tools",
+            "pages": ["integrations/cli"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Organizations",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/organizations/get-all",
+              "api-reference/organizations/by-organization-id",
+              "api-reference/organizations/by-organization-name",
+              "api-reference/organizations/signal-history"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Radar",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/radar/get-all",
+              "api-reference/radar/by-organization-id",
+              "api-reference/radar/by-category"
+            ]
+          },
+          {
+            "group": "Signal",
+            "pages": [
+              "api-reference/signal/top",
+              "api-reference/signal/get-all",
+              "api-reference/signal/by-organization-id",
+              "api-reference/signal/by-category"
+            ]
+          },
+          {
+            "group": "Brief",
+            "pages": [
+              "api-reference/brief/get",
+              "api-reference/brief/batch"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks/overview",
+              "api-reference/webhooks/create",
+              "api-reference/webhooks/list",
+              "api-reference/webhooks/delete"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "api-reference/categories",
+              "api-reference/usage"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+  "api": {
+    "mdx": {
+      "server": "https://api.shoal.xyz",
+      "auth": {
+        "method": "bearer"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
     }
   }
 }

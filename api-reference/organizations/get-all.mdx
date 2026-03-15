@@ -1,0 +1,30 @@
+---
+title: 'Get All Organizations'
+api: 'GET /v1/organizations/all'
+description: 'Get all organizations'
+---
+
+## Query Parameters
+- `limit` (integer, default: 50)
+- `offset` (integer, default: 0)
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/organizations/all?limit=50&offset=0" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response (200)
+```json
+{
+  "limit": 50,
+  "offset": 0,
+  "data": [
+    {
+      "id": 526,
+      "label": "Organization Name",
+      "aliases": ["Alias1", "Alias2"]
+    }
+  ]
+}
+```

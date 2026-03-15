@@ -1,0 +1,40 @@
+---
+title: 'Register Webhook'
+description: 'Register a new webhook endpoint'
+api: 'POST /v1/webhooks'
+---
+
+Registers a new webhook URL to receive real-time event deliveries.
+
+## Body
+
+<ParamField body="url" type="string" required>
+  The HTTPS URL to deliver events to. Must not point to a private/internal address.
+</ParamField>
+
+<ParamField body="event_types" type="array" required>
+  Array of event types to subscribe to. Valid values: `"radar"`, `"signal"`.
+
+  ```json
+  { "event_types": ["radar", "signal"] }
+  ```
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="number">Webhook ID.</ResponseField>
+<ResponseField name="url" type="string">The registered URL.</ResponseField>
+<ResponseField name="event_types" type="array">Subscribed event types.</ResponseField>
+<ResponseField name="secret" type="string">
+  HMAC secret for verifying `X-Shoal-Signature` on deliveries. **Store this securely — it is only shown once.**
+</ResponseField>
+<ResponseField name="created_at" type="string">ISO 8601 creation timestamp.</ResponseField>
+
+## Example
+
+```bash
+curl -sS -X POST "https://api.shoal.xyz/v1/webhooks" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"url":"https://your-server.com/hooks/shoal","event_types":["signal"]}'
+```

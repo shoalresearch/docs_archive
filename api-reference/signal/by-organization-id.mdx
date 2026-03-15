@@ -1,0 +1,21 @@
+---
+title: 'Get Signals by Organization ID'
+api: 'GET /v1/signal/byOrganizationId'
+description: 'Get signal events for a specific organization by ID'
+---
+
+## Query Parameters
+- `id` (integer, required) — Organization ID
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/signal/byOrganizationId?id=526" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+Same as `/v1/signal/all` but filtered for one organization.
+
+### Errors
+- 400 if `id` missing
+- 500 on internal server error

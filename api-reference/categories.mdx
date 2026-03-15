@@ -1,0 +1,52 @@
+---
+title: 'Categories'
+description: 'List all available event categories'
+api: 'GET /v1/categories'
+---
+
+Returns all distinct event categories present in the Shoal database. Use these values with `byCategory` endpoints to filter radar and signal events.
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of category strings (e.g. `"regulation_legal"`, `"partnership"`, `"exploit_hack"`).
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/categories" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```bash
+# CLI
+shoal categories
+```
+
+```json
+{
+  "data": [
+    "defi_activity",
+    "exploit_hack",
+    "funding_investment",
+    "governance",
+    "partnership",
+    "product_launch",
+    "regulation_legal",
+    "token_activity"
+  ]
+}
+```
+
+## Using Categories to Filter
+
+```bash
+# Get radar events in a specific category
+curl -sS "https://api.shoal.xyz/v1/radar/byCategory?category=exploit_hack&since=2025-01-01T00:00:00Z" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Get signal events in a specific category
+curl -sS "https://api.shoal.xyz/v1/signal/byCategory?category=regulation_legal&since=2025-01-01T00:00:00Z" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

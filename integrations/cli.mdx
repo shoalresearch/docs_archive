@@ -1,0 +1,153 @@
+---
+title: 'CLI Tool'
+description: 'Query Shoal signals and radar events directly from your terminal'
+---
+
+## Installation
+
+<Tabs>
+  <Tab title="curl (Recommended)">
+    The fastest way to install on macOS or Linux:
+
+    ```bash
+    curl -fsSL https://api.shoal.xyz/install | bash
+    ```
+
+    The script checks for Node.js 18+, installs `shoal-cli` globally via npm, and prints a quickstart.
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm install -g shoal-cli
+    ```
+  </Tab>
+  <Tab title="npx (no install)">
+    Run a single command without installing:
+
+    ```bash
+    npx shoal-cli signal top
+    ```
+  </Tab>
+</Tabs>
+
+## Authentication
+
+Save your API key locally — required before running any other command.
+
+```bash
+shoal auth <api-key>
+```
+
+Your key is stored in `~/.shoal/config.json` and used automatically for all subsequent commands.
+
+---
+
+## Signal Commands
+
+### Top signals
+
+Fetch the top-ranked signal events by score.
+
+```bash
+shoal signal top
+shoal signal top --limit 20
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--limit` | Number of results to return | 10 |
+
+### All signals
+
+List all signal events with optional filtering.
+
+```bash
+shoal signal all
+shoal signal all --limit 50
+shoal signal all --since 2h
+shoal signal all --limit 100 --offset 50 --since 2025-01-01T00:00:00Z
+```
+
+| Flag | Description |
+|------|-------------|
+| `--limit` | Number of results to return |
+| `--offset` | Pagination offset |
+| `--since` | Filter to events after this time (shorthand or ISO 8601) |
+
+---
+
+## Radar Commands
+
+### All radar events
+
+```bash
+shoal radar all
+shoal radar all --limit 50
+shoal radar all --since 1d
+```
+
+| Flag | Description |
+|------|-------------|
+| `--limit` | Number of results to return |
+| `--offset` | Pagination offset |
+| `--since` | Filter to events after this time (shorthand or ISO 8601) |
+
+---
+
+## Orgs Commands
+
+### Search by name
+
+```bash
+shoal orgs search "BlackRock"
+```
+
+### Get by ID
+
+```bash
+shoal orgs get 526
+shoal orgs get 526 --include radar,signal
+```
+
+| Flag | Description |
+|------|-------------|
+| `--include` | Comma-separated list of related data to embed (`radar`, `signal`) |
+
+---
+
+## Categories
+
+List all available event categories.
+
+```bash
+shoal categories
+```
+
+---
+
+## The `--since` Flag
+
+The `--since` flag accepts both shorthand durations and ISO 8601 timestamps:
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| Minutes | `30m` | Last 30 minutes |
+| Hours | `2h` | Last 2 hours |
+| Days | `1d` | Last 24 hours |
+| ISO 8601 | `2025-01-01T00:00:00Z` | Since a specific timestamp |
+
+---
+
+## Piping to jq
+
+The CLI outputs JSON, making it easy to filter and transform with [`jq`](https://jqlang.github.io/jq/).
+
+```bash
+# Extract org names from top signals
+shoal signal top --limit 20 | jq '.[].organization.name'
+
+# Filter radar events from the last hour
+shoal radar all --since 1h | jq '.[] | select(.score > 0.8)'
+
+# Get signal events for a specific org
+shoal orgs get 526 --include signal | jq '.signal[]'
+```

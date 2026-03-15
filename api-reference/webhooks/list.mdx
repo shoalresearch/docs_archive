@@ -1,0 +1,31 @@
+---
+title: 'List Webhooks'
+description: 'List all registered webhooks for your API key'
+api: 'GET /v1/webhooks'
+---
+
+Returns all webhook registrations associated with your API key.
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of webhook objects.
+
+  <Expandable title="Webhook object">
+    <ResponseField name="id" type="number">Webhook ID.</ResponseField>
+    <ResponseField name="url" type="string">Registered URL.</ResponseField>
+    <ResponseField name="event_types" type="array">Subscribed event types.</ResponseField>
+    <ResponseField name="created_at" type="string">ISO 8601 creation timestamp.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Note>
+  Webhook secrets are not returned by this endpoint. Save your secret when you first create a webhook.
+</Note>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/webhooks" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

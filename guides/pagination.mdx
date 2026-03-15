@@ -1,0 +1,21 @@
+---
+title: 'Pagination'
+description: 'limit/offset pagination across list endpoints'
+---
+
+Shoal API uses simple `limit` and `offset` query parameters on list endpoints.
+
+## Parameters
+
+- `limit`: number of items to return (default: 50)
+- `offset`: number of items to skip (default: 0)
+
+## Example
+
+```bash
+curl "https://api.shoal.xyz/v1/radar/all?limit=50&offset=100" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+To fetch the next page, increase `offset` by `limit`.
+

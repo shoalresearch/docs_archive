@@ -1,0 +1,34 @@
+---
+title: 'Shoal API Documentation'
+description: 'Intelligence for prediction markets and crypto research'
+---
+
+## What Is Shoal?
+
+ Shoal is an intelligence layer powering prediction markets and crypto research. The API aggregates and normalizes signals about organizations, markets, and event narratives so traders, researchers, and developers can build strategies, alerts, and products that react to real‑world semantic information.
+
+Key goals:
+
+- Turn raw, messy information into structured, queryable signals
+- Bridge real‑world events to market outcomes (e.g., Polymarket)
+- Enable repeatable workflows for analysis, trading, and product features
+
+## Who It’s For
+
+- Traders and researchers building systematic or discretionary strategies
+- Bot and app developers (alerts, dashboards, copilots)
+- Data teams enriching internal models with market‑linked signals
+
+## Core Concepts
+
+- Organizations: canonical profiles (ID, label, aliases) representing teams, companies, protocols, funds, and public entities
+- Radar: real-time event clusters with summaries, categories, and source posts linked to organizations
+- Signal: scored events with quantified signal strength for prioritizing what matters
+
+Shoal links these concepts so you can follow “organization → radar event → signal score” end‑to‑end.
+
+## Base URL
+
+```
+https://api.shoal.xyz/v1
+```

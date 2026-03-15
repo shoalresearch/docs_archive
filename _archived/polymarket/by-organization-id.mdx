@@ -1,0 +1,32 @@
+---
+title: 'Get Markets by Organization ID'
+api: 'GET /v1/polymarket/byOrganizationId'
+description: 'Get a specific markets by Organization ID'
+---
+
+## Query Parameters
+- `id` (integer, required) — Organization ID
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/polymarket/byOrganizationId?id=1" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response (200)
+```json
+{
+  "data": [
+    {
+      "org_id": 1,
+      "organization": "Org Name",
+      "markets": [],
+      "events": []
+    }
+  ]
+}
+```
+
+### Errors
+- 400 if `id` is missing
+- 500 on internal server error

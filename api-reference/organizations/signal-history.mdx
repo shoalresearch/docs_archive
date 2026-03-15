@@ -1,0 +1,40 @@
+---
+title: 'Organization Signal History'
+description: 'Get signal event history for an organization over time'
+api: 'GET /v1/organizations/{id}/signal-history'
+---
+
+Returns a time-series of signal activity for a specific organization. Useful for charting momentum, identifying spikes, or building organization-level dashboards.
+
+## Path Parameters
+
+<ParamField path="id" type="number" required>
+  The organization ID.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="days" type="number" default="30">
+  Number of days of history to return. Maximum `90`.
+</ParamField>
+
+## Response
+
+<ResponseField name="data" type="object">
+  Signal history data for the organization.
+
+  <Expandable title="Signal history object">
+    <ResponseField name="organizationId" type="number">The organization ID.</ResponseField>
+    <ResponseField name="label" type="string">Organization name.</ResponseField>
+    <ResponseField name="history" type="array">
+      Array of daily signal counts and scores.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/organizations/526/signal-history?days=14" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

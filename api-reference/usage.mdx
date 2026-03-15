@@ -1,0 +1,25 @@
+---
+title: 'Usage'
+description: 'Check your API usage and quota'
+api: 'GET /v1/usage'
+---
+
+Returns current usage stats for your API key — requests used, quota, and reset timing.
+
+## Response
+
+<ResponseField name="data" type="object">
+  <Expandable title="Usage object">
+    <ResponseField name="used" type="number">Number of API credits used in the current period.</ResponseField>
+    <ResponseField name="limit" type="number">Total API credits available in the current period.</ResponseField>
+    <ResponseField name="remaining" type="number">Credits remaining.</ResponseField>
+    <ResponseField name="reset_at" type="string">ISO 8601 timestamp when the usage counter resets.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/usage" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

@@ -1,0 +1,41 @@
+---
+title: 'Errors'
+description: 'Error responses, status codes, and troubleshooting'
+---
+
+## Error Format
+
+All error responses return JSON with an `error` string:
+
+```json
+{ "error": "Authorization header missing or malformed" }
+```
+
+## Common Status Codes
+
+- `400 Bad Request`: missing or invalid parameter
+- `401 Unauthorized`: missing or malformed Authorization header
+- `403 Forbidden`: invalid API key
+- `404 Not Found`: invalid endpoint path
+- `500 Internal Server Error`: unexpected server error
+
+## Authentication Errors
+
+- Missing or malformed header (401):
+
+```json
+{ "error": "Authorization header missing or malformed" }
+```
+
+- Invalid API key (403):
+
+```json
+{ "error": "Invalid API key" }
+```
+
+## Not Found (404)
+
+```json
+{ "error": "Not Found", "path": "/v1/invalid/route", "method": "GET" }
+```
+

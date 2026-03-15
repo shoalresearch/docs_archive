@@ -1,0 +1,16 @@
+---
+title: 'Rate Limits'
+description: 'Guidance on request pacing and retries'
+---
+
+To ensure reliable service for all users, please pace requests and implement retries with backoff.
+
+## Best Practices
+
+- Batch requests where possible (use `limit`/`offset`)
+- Add small jittered delays between bursts
+- Implement exponential backoff on non-2xx responses
+- Use a descriptive `User-Agent` header (app name and version)
+
+If you encounter throttling (e.g., HTTP 429), reduce your request rate and retry after a delay.
+

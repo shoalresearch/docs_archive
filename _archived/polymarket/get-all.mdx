@@ -1,0 +1,41 @@
+---
+title: 'Get All Markets'
+api: 'GET /v1/polymarket/all'
+description: 'Get all markets with events'
+---
+
+## Query Parameters
+- `limit` (integer, default: 50) — Number of organizations to return
+- `offset` (integer, default: 0) — Pagination offset
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/polymarket/all?limit=50&offset=0" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response (200)
+```json
+{
+  "limit": 50,
+  "offset": 0,
+  "data": [
+    {
+      "organization": "Organization Name",
+      "markets": [{ /* ...pm.properties... */ }],
+      "events": [
+        {
+          "subevent_id": 123,
+          "subevent_label": "Subevent Name",
+          "subevent_type": "Type",
+          "normalized_title": "Normalized Title",
+          "injected_summary": "Summary",
+          "posts": [
+            { "id": 1, "content": "Post content", "date": "2026-01-22T12:00:00Z" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```

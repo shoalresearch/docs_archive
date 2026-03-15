@@ -1,0 +1,36 @@
+---
+title: 'Get All Events'
+api: 'GET /v1/events/all'
+description: 'Get all events'
+---
+
+## Query Parameters
+- `limit` (integer, default: 50)
+- `offset` (integer, default: 0)
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/events/all?limit=50&offset=0" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response (200)
+```json
+{
+  "data": [
+    {
+      "organization": "Organization Name",
+      "events": [
+        {
+          "subevent_id": 123,
+          "subevent_label": "Subevent Name",
+          "subevent_type": "Type",
+          "normalized_title": "Normalized Title",
+          "injected_summary": "Summary",
+          "posts": [ /* ... */ ]
+        }
+      ]
+    }
+  ]
+}
+```

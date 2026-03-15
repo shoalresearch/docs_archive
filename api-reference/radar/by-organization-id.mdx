@@ -1,0 +1,21 @@
+---
+title: 'Get Radar by Organization ID'
+api: 'GET /v1/radar/byOrganizationId'
+description: 'Get radar events for a specific organization by ID'
+---
+
+## Query Parameters
+- `id` (integer, required) — Organization ID
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/radar/byOrganizationId?id=526" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+Same as `/v1/radar/all` but filtered for one organization.
+
+### Errors
+- 400 if `id` missing
+- 500 on internal server error

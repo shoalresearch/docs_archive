@@ -1,0 +1,48 @@
+---
+title: 'Top Signal Events'
+description: 'Retrieve the highest-scoring signal events'
+api: 'GET /v1/signal/top'
+---
+
+Returns the top signal events ranked by score. Useful for a real-time feed of the most significant intelligence without needing a time filter.
+
+## Query Parameters
+
+<ParamField query="limit" type="number" default="10">
+  Number of results to return. Maximum `50`.
+</ParamField>
+
+## Response
+
+<ResponseField name="limit" type="number">
+  The limit applied to the query.
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of signal event objects, sorted by score descending.
+
+  <Expandable title="Signal event object">
+    <ResponseField name="id" type="number">Unique event ID.</ResponseField>
+    <ResponseField name="title" type="string">Short title summarizing the event.</ResponseField>
+    <ResponseField name="eventCategory" type="string">Category (e.g. `regulation_legal`, `partnership`).</ResponseField>
+    <ResponseField name="eventSubcategory" type="string">Subcategory for finer classification.</ResponseField>
+    <ResponseField name="globalSummary" type="string">One-paragraph narrative summary.</ResponseField>
+    <ResponseField name="bulletSummary" type="array">Key bullet points as a string array.</ResponseField>
+    <ResponseField name="eventOwner" type="array">Primary organizations associated with this event.</ResponseField>
+    <ResponseField name="eventParticipants" type="array">Secondary organizations mentioned.</ResponseField>
+    <ResponseField name="posts" type="array">Source posts that contributed to this cluster.</ResponseField>
+    <ResponseField name="latestPostTimestamp" type="string">ISO 8601 timestamp of the most recent source post.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/signal/top?limit=5" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```bash
+# CLI
+shoal signal top --limit 5
+```

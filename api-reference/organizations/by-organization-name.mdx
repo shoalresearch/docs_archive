@@ -1,0 +1,21 @@
+---
+title: 'Get Organization by Name'
+api: 'GET /v1/organizations/byOrganizationName'
+description: 'Get organization info by name or alias'
+---
+
+## Query Parameters
+- `name` (string, required)
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/organizations/byOrganizationName?name=Org" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+Same as `/v1/organizations/byOrganizationId`.
+
+### Errors
+- 400 if `name` missing
+- 500 on internal server error

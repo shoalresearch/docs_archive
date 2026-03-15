@@ -1,0 +1,15 @@
+---
+title: 'Versioning'
+description: 'API version and compatibility guidance'
+---
+
+The base URL includes a version prefix: `https://api.shoal.xyz/v1`.
+
+## Guidelines
+
+- Avoid hardcoding the version in multiple places in your app
+- Monitor release notes for changes (see Changelog)
+- Expect additive, non-breaking changes within `v1` (e.g., new fields)
+
+Major breaking changes, if any, will be introduced under a new prefix (e.g., `/v2`).
+

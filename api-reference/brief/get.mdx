@@ -1,0 +1,45 @@
+---
+title: 'Get Brief'
+description: 'Get a structured intelligence brief for an organization'
+api: 'GET /v1/brief'
+---
+
+Returns a compact intelligence brief for a single organization — a summary of recent radar and signal activity, ready to embed in dashboards or LLM prompts.
+
+## Query Parameters
+
+<ParamField query="id" type="number" required>
+  Organization ID.
+</ParamField>
+
+<ParamField query="since" type="string" required>
+  ISO 8601 timestamp. Only events after this time are included.
+</ParamField>
+
+<ParamField query="limit" type="number" default="5">
+  Max number of events to include per category (radar, signal). Maximum `20`.
+</ParamField>
+
+<ParamField query="compact" type="boolean" default="false">
+  If `true`, returns condensed summaries without full post content.
+</ParamField>
+
+## Response
+
+<ResponseField name="organizationId" type="number">The organization ID.</ResponseField>
+<ResponseField name="label" type="string">Organization name.</ResponseField>
+<ResponseField name="radar" type="array">Recent radar events for this organization.</ResponseField>
+<ResponseField name="signal" type="array">Recent signal events for this organization.</ResponseField>
+<ResponseField name="counts" type="object">
+  <Expandable title="counts">
+    <ResponseField name="radar" type="number">Total radar events in the time window.</ResponseField>
+    <ResponseField name="signal" type="number">Total signal events in the time window.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/brief?id=526&since=2025-01-01T00:00:00Z&limit=3" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

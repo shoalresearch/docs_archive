@@ -1,0 +1,33 @@
+---
+title: 'Authentication'
+description: 'API key authentication using Bearer tokens'
+---
+
+All API endpoints are protected and require a valid API key for access. Send the API key in the HTTP header using the Bearer token scheme.
+
+Header name: `Authorization`
+Scheme: `Bearer`
+
+```
+Authorization: Bearer <YOUR_API_KEY>
+```
+
+### Behavior
+
+1. Missing header:
+```json
+{ "error": "Missing Authorization header" }
+```
+
+2. Invalid format (not "Bearer "):
+```json
+{ "error": "Invalid Authorization header format" }
+```
+
+3. Invalid API key (not in database):
+```json
+{ "error": "Unauthorized" }
+```
+
+4. Valid API key: the request is allowed to access the endpoint.
+

@@ -1,0 +1,29 @@
+---
+title: 'Get Organization by ID'
+api: 'GET /v1/organizations/byOrganizationId'
+description: 'Get organization info by ID'
+---
+
+## Query Parameters
+- `id` (integer, required)
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/organizations/byOrganizationId?id=526" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response (200)
+```json
+{
+  "data": {
+    "id": 526,
+    "label": "Organization Name",
+    "aliases": ["Alias1", "Alias2"]
+  }
+}
+```
+
+### Errors
+- 400 if `id` missing
+- 500 on internal server error

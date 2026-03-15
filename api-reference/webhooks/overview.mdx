@@ -1,0 +1,52 @@
+---
+title: 'Webhooks'
+description: 'Receive real-time Shoal events via HTTP POST to your endpoint'
+---
+
+Webhooks let you receive `radar` and `signal` events in real time without polling the API. When new events are detected, Shoal delivers a signed HTTP POST to your registered URL.
+
+## How It Works
+
+1. Register a webhook URL with the event types you want (`radar`, `signal`, or both)
+2. Shoal polls for new events every minute
+3. When events are found, they are POSTed to your URL as JSON
+4. Verify the `X-Shoal-Signature` header to confirm authenticity
+
+## Signature Verification
+
+Each delivery includes an `X-Shoal-Signature` header — an HMAC-SHA256 of the raw request body, keyed with your webhook secret.
+
+```javascript
+import crypto from 'crypto';
+
+function verifySignature(body, signature, secret) {
+  const expected = crypto
+    .createHmac('sha256', secret)
+    .update(body)
+    .digest('hex');
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expected)
+  );
+}
+```
+
+## Limits
+
+- Maximum **5 webhooks** per API key
+- Webhook URLs must use **HTTPS** and must not point to private/internal addresses
+- Deliveries are attempted once per poll cycle; failed deliveries are not retried
+
+## Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Register Webhook" icon="plus" href="/api-reference/webhooks/create">
+    POST /v1/webhooks
+  </Card>
+  <Card title="List Webhooks" icon="list" href="/api-reference/webhooks/list">
+    GET /v1/webhooks
+  </Card>
+  <Card title="Delete Webhook" icon="trash" href="/api-reference/webhooks/delete">
+    DELETE /v1/webhooks/:id
+  </Card>
+</CardGroup>

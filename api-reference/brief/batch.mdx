@@ -1,0 +1,53 @@
+---
+title: 'Get Brief Batch'
+description: 'Get intelligence briefs for multiple organizations in one request'
+api: 'GET /v1/brief/batch'
+---
+
+Returns intelligence briefs for up to 25 organizations in a single request. Efficient for building watchlists, portfolio dashboards, or multi-org summaries.
+
+## Query Parameters
+
+<ParamField query="ids" type="string" required>
+  Comma-separated list of organization IDs. Maximum `25`.
+
+  Example: `ids=526,184,655`
+</ParamField>
+
+<ParamField query="since" type="string" required>
+  ISO 8601 timestamp. Only events after this time are included.
+</ParamField>
+
+<ParamField query="limit" type="number" default="5">
+  Max number of events per organization per category. Maximum `10`.
+</ParamField>
+
+<ParamField query="compact" type="boolean" default="false">
+  If `true`, returns condensed summaries without full post content.
+</ParamField>
+
+## Response
+
+<ResponseField name="organizations" type="array">
+  Array of brief objects, one per requested organization ID.
+
+  <Expandable title="Brief object">
+    <ResponseField name="organizationId" type="number">The organization ID.</ResponseField>
+    <ResponseField name="label" type="string">Organization name, or `null` if not found.</ResponseField>
+    <ResponseField name="error" type="string">Present only if the organization was not found.</ResponseField>
+    <ResponseField name="radar" type="array">Recent radar events.</ResponseField>
+    <ResponseField name="signal" type="array">Recent signal events.</ResponseField>
+    <ResponseField name="counts" type="object">Radar and signal event counts.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="creditCost" type="number">
+  Number of API credits consumed by this request (`organizations × 3`).
+</ResponseField>
+
+## Example
+
+```bash
+curl -sS "https://api.shoal.xyz/v1/brief/batch?ids=526,184&since=2025-01-01T00:00:00Z" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```

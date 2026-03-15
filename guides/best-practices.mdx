@@ -1,0 +1,25 @@
+---
+title: 'Best Practices'
+description: 'Integration tips for reliability and performance'
+---
+
+## Networking
+
+- Set reasonable timeouts (e.g., 10–30s) and retry on transient failures
+- Use HTTPS only; verify certificates by default
+
+## Authentication
+
+- Store API keys securely (env vars, secret stores)
+- Do not embed keys in client-side code or public repos
+
+## Pagination & Memory
+
+- Prefer paginated fetches over large single responses
+- Stream or process items incrementally where possible
+
+## Observability
+
+- Log request IDs and timestamps alongside responses
+- Add a descriptive `User-Agent` (e.g., `your-app/1.2.3`)
+

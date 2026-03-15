@@ -1,0 +1,21 @@
+---
+title: 'Get Markets by Organization Name'
+api: 'GET /v1/polymarket/byOrganizationName'
+description: 'Get a specific markets by Organization name'
+---
+
+## Query Parameters
+- `name` (string, required) — Organization name or alias
+
+### Request
+```bash cURL
+curl -X GET "https://api.shoal.xyz/v1/polymarket/byOrganizationName?name=Org" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+Same as `/v1/polymarket/byOrganizationId`.
+
+### Errors
+- 400 if `name` is missing
+- 500 on internal server error
