@@ -1,0 +1,105 @@
+---
+title: 'Machine Payments (MPP)'
+description: 'Pay-per-request API access with no API key required'
+---
+
+The Shoal API supports the [Machine Payments Protocol (MPP)](https://mpp.dev) — an open standard by Tempo and Stripe that enables pay-per-request access using HTTP 402.
+
+This is ideal for AI agents, one-off scripts, and services that need Shoal data without managing API keys.
+
+## Pricing
+
+| | |
+|---|---|
+| **Per request** | $0.01 USD |
+| **Payment methods** | Stripe (card, Link) |
+| **Billing** | Per-request, no subscription |
+
+## How It Works
+
+```
+Client                          Shoal API
+  │                                │
+  │  GET /v1/signal/top            │
+  │──────────────────────────────►│
+  │                                │
+  │  402 Payment Required          │
+  │  WWW-Authenticate: Payment ... │
+  │◄──────────────────────────────│
+  │                                │
+  │  (client pays via Stripe)      │
+  │                                │
+  │  GET /v1/signal/top            │
+  │  Authorization: Payment ...    │
+  │──────────────────────────────►│
+  │                                │
+  │  200 OK                        │
+  │  Payment-Receipt: ...          │
+  │◄──────────────────────────────│
+```
+
+## Quick Start
+
+Install the MPP CLI and create a test account:
+
+```bash
+npx mppx account create
+```
+
+Make a paid request:
+
+```bash
+npx mppx pay GET https://api.shoal.xyz/v1/signal/top
+```
+
+## TypeScript
+
+```typescript
+import { MppClient, stripe } from "mppx/client";
+
+const client = MppClient.create({
+  methods: [stripe()],
+});
+
+const response = await client.fetch(
+  "https://api.shoal.xyz/v1/signal/top?limit=10"
+);
+const data = await response.json();
+```
+
+## Python
+
+```python
+from pympp import MppClient
+
+client = MppClient(methods=["stripe"])
+
+response = client.get(
+    "https://api.shoal.xyz/v1/signal/top",
+    params={"limit": 10},
+)
+data = response.json()
+```
+
+## Rust
+
+```rust
+use mpp::MppClient;
+
+let client = MppClient::builder()
+    .stripe()
+    .build();
+
+let response = client
+    .get("https://api.shoal.xyz/v1/signal/top?limit=10")
+    .send()
+    .await?;
+```
+
+## Notes
+
+- MPP works on all `/v1/*` endpoints
+- No API key or account signup required
+- Each request is independently paid and verified
+- Payment receipts are returned in the `Payment-Receipt` response header
+- Learn more at [mpp.dev](https://mpp.dev)
