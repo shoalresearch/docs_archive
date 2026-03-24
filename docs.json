@@ -12,6 +12,20 @@
     "light": "#FF8C5A",
     "dark": "#E85A2A"
   },
+  "navbar": {
+    "links": [
+      {
+        "label": "Get API Key",
+        "href": "https://app.shoal.xyz"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/shoalresearch",
+      "github": "https://github.com/shoalresearch"
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -22,7 +36,12 @@
             "pages": [
               "introduction",
               "quickstart",
-              "api-reference/authentication",
+              "api-reference/authentication"
+            ]
+          },
+          {
+            "group": "Using the API",
+            "pages": [
               "guides/pagination",
               "guides/errors",
               "guides/rate-limits",
@@ -43,10 +62,6 @@
           {
             "group": "SDK & Tools",
             "pages": ["integrations/cli"]
-          },
-          {
-            "group": "Payments",
-            "pages": ["integrations/mpp"]
           }
         ]
       },
@@ -58,7 +73,8 @@
             "pages": [
               "api-reference/organizations/get-all",
               "api-reference/organizations/by-organization-id",
-              "api-reference/organizations/by-organization-name"
+              "api-reference/organizations/by-organization-name",
+              "api-reference/organizations/signal-history"
             ]
           },
           {
@@ -72,9 +88,33 @@
           {
             "group": "Signal",
             "pages": [
+              "api-reference/signal/top",
               "api-reference/signal/get-all",
               "api-reference/signal/by-organization-id",
               "api-reference/signal/by-category"
+            ]
+          },
+          {
+            "group": "Brief",
+            "pages": [
+              "api-reference/brief/get",
+              "api-reference/brief/batch"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks/overview",
+              "api-reference/webhooks/create",
+              "api-reference/webhooks/list",
+              "api-reference/webhooks/delete"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "api-reference/categories",
+              "api-reference/usage"
             ]
           }
         ]
@@ -88,10 +128,5 @@
         "method": "bearer"
       }
     }
-  },
-  "colors": {
-    "primary": "#FF6B35",
-    "light": "#FF8C5A",
-    "dark": "#E85A2A"
   }
 }

@@ -1,59 +1,33 @@
 ---
 title: 'Authentication'
-description: 'API key and pay-per-request authentication'
+description: 'API key authentication using Bearer tokens'
 ---
 
-The Shoal API supports two authentication methods. You can use either one — they work on all endpoints.
+All API endpoints are protected and require a valid API key for access. Send the API key in the HTTP header using the Bearer token scheme.
 
-## Option 1: API Key (Bearer Token)
-
-Send your API key in the `Authorization` header using the Bearer scheme.
+Header name: `Authorization`
+Scheme: `Bearer`
 
 ```
 Authorization: Bearer <YOUR_API_KEY>
 ```
 
-Get your API key at [app.shoal.xyz](https://app.shoal.xyz).
+### Behavior
 
-### Error Responses
-
-| Status | Body | Cause |
-|--------|------|-------|
-| 401 | `{ "error": "Missing Authorization header" }` | No header sent |
-| 401 | `{ "error": "Invalid Authorization header format" }` | Not `Bearer <key>` |
-| 401 | `{ "error": "Unauthorized" }` | Key not found |
-
-## Option 2: Pay-Per-Request (MPP)
-
-No API key needed. The Shoal API supports the [Machine Payments Protocol (MPP)](https://mpp.dev) — an open standard for HTTP 402 pay-per-request access.
-
-**Price:** $0.01 per request, paid via Stripe (card or Link).
-
-### How It Works
-
-1. Send a request with no `Authorization` header (or with `Authorization: Payment ...`)
-2. The API returns `402 Payment Required` with a `WWW-Authenticate: Payment` challenge
-3. Your client pays via Stripe and retries with the payment credential
-4. The API verifies payment and returns the response with a `Payment-Receipt` header
-
-### Quick Start
-
-Use the `mppx` CLI to test:
-
-```bash
-npx mppx account create
-npx mppx pay GET https://api.shoal.xyz/v1/signal/top
+1. Missing header:
+```json
+{ "error": "Missing Authorization header" }
 ```
 
-### SDK Support
-
-MPP clients are available for TypeScript, Python, and Rust:
-
-```bash
-npm install mppx        # TypeScript
-pip install pympp        # Python
-cargo add mpp            # Rust
+2. Invalid format (not "Bearer "):
+```json
+{ "error": "Invalid Authorization header format" }
 ```
 
-See the [MPP integration guide](/integrations/mpp) for code examples.
+3. Invalid API key (not in database):
+```json
+{ "error": "Unauthorized" }
+```
+
+4. Valid API key: the request is allowed to access the endpoint.
 
